@@ -281,10 +281,6 @@ jobs:
         description: "Path to restore the workspace"
         type: string
         default: ~/project
-      cache-suffix:
-        description: "Suffix to use for the cache key, e.g. -v2, to be able to clear the cache"
-        default: ""
-        type: string
       enable-pr-comment:
         description: "Flag that enables/disables to add a comment on the PR with the result of Snyk test"
         default: false
@@ -293,8 +289,6 @@ jobs:
     steps:
       - attach_workspace:
           at: <<parameters.workspace-dir>>
-      - load_cache:
-          cache-suffix: <<parameters.cache-suffix>>
       - run: *sbt-dependency-graph
       - when:
           condition: <<parameters.enable-pr-comment>>
